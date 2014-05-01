@@ -40,11 +40,12 @@ body {
 }
 
 h1.title {
-  font-size: 80px;
+  font-size: 65px;
   font-weight: bold;
   margin: 0;
   display: block;
   float: left;
+  position: relative;
 }
 
 @include keyframes(move-up) {
@@ -382,18 +383,25 @@ hr {
       }
 
       // Adjust font size for bigger numbers
-      @if $power >= 100 and $power < 1000 {
+      @if $power >= 10 and $power < 100 {
         font-size: 45px;
 
         // Media queries placed here to avoid carrying over the rest of the logic
         @include smaller($mobile-threshold) {
           font-size: 25px;
         }
-      } @else if $power >= 1000 {
-        font-size: 35px;
+      } @else if $power >= 100 and $power < 1000 {
+        font-size: 30px;
 
+        // Media queries placed here to avoid carrying over the rest of the logic
         @include smaller($mobile-threshold) {
           font-size: 15px;
+        }
+      } @else if $power >= 1000 {
+        font-size: 25px;
+
+        @include smaller($mobile-threshold) {
+          font-size: 5px;
         }
       }
     }
@@ -474,12 +482,12 @@ hr {
 
 @include smaller($mobile-threshold) {
   // Redefine variables for smaller screens
-  $field-width: 280px;
-  $grid-spacing: 10px;
-  $grid-row-cells: 4;
-  $tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
-  $tile-border-radius: 3px;
-  $game-container-margin-top: 17px;
+  $field-width: 280px !global;
+  $grid-spacing: 10px !global;
+  $grid-row-cells: 4 !global;
+  $tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells !global;
+  $tile-border-radius: 3px !global;
+  $game-container-margin-top: 17px !global;
 
   html, body {
     font-size: 15px;
