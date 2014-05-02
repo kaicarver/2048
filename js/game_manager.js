@@ -184,6 +184,12 @@ GameManager.prototype.move = function (direction) {
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
+
+      document.getElementById("audiobeep").currentTime=0;
+      document.getElementById("audiobeep").play();
+    } else {
+      document.getElementById("audioboop").currentTime=0;
+      document.getElementById("audioboop").play();
     }
 
     this.actuate();
