@@ -182,15 +182,16 @@ GameManager.prototype.move = function (direction) {
   if (moved) {
     this.addRandomTile();
 
+    var sound;
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
 
-      document.getElementById("audiobeep").currentTime=0;
-      document.getElementById("audiobeep").play();
+      sound = document.getElementById("audiobeep");
     } else {
-      document.getElementById("audioboop").currentTime=0;
-      document.getElementById("audioboop").play();
+      sound = document.getElementById("audioboop");
     }
+    if (sound.readyState === 4) { sound.currentTime = 0; } // only do this if sound is loaded
+    sound.play(); // will load sound if not loaded yet (preload doesn't work on mobile)
 
     this.actuate();
   }
